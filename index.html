@@ -348,7 +348,6 @@
       <div class="cd-stage" id="cdStage">
         <div class="cd" id="cd">
           <div class="disc"><div class="hub"></div></div>
-          <div class="sheen"></div>
         </div>
         <div class="platforms">
           <a class="plat" href="https://centeiia.bandcamp.com/album/la-luz-es-cuesti-n-de-tiempo" target="_blank" rel="noopener" aria-label="Escuchar en Bandcamp" title="Bandcamp">
@@ -691,7 +690,6 @@ cdStage.addEventListener('pointerleave',()=>{ctx=cty=0;chv=0;});
     const s=t/1000,k=calm;ccx+=(ctx-ccx)*.06;ccy+=(cty-ccy)*.06;cch+=(chv-cch)*.05;
     const ry=ccx*16*k,rx=-ccy*14*k;
     cd.style.transform=`translate(${ccx*8}px,${ccy*6}px) rotateX(${rx}deg) rotateY(${ry}deg) scale(${1+cch*.03})`;
-    cd.style.setProperty('--sa',(30+ccx*50+ccy*30)+'deg');
   }
   requestAnimationFrame(cdLoop);
 })(0);
