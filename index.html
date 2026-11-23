@@ -186,6 +186,11 @@
   .bc-fallback b{display:block;font:400 15px/1.3 'IBM Plex Mono',ui-monospace,monospace}
   .bc-fallback span{display:block;margin-top:6px;color:var(--grey);font:300 12px/1.5 'IBM Plex Mono',ui-monospace,monospace}
   .rec-cred{margin:26px 0 30px;color:var(--grey);font:300 13px/1.7 'IBM Plex Mono',ui-monospace,monospace;max-width:52ch}
+  .credits{margin:34px 0 30px;display:grid;gap:12px;font:300 13px/1.6 'IBM Plex Mono',ui-monospace,monospace}
+  .credits div{display:grid;grid-template-columns:9.5em 1fr;gap:14px}
+  .credits dt{color:var(--grey)}
+  .credits dd{margin:0;color:#d4d4d4;max-width:52ch}
+  @media (max-width:520px){.credits div{grid-template-columns:1fr;gap:2px}}
   .platforms{display:flex;flex-wrap:wrap;gap:26px}
   @media (max-width:860px){.listen{grid-template-columns:1fr}.cd-stage{position:relative;top:0}.cd{width:min(86vw,420px)}}
   @media (prefers-reduced-motion:reduce){.disc{animation:none}}
@@ -345,7 +350,19 @@
         <p class="rec-meta">Centeiia Fútbol Club</p>
         <div class="bc" id="bc"></div>
         <ol class="tracks" id="tracks"></ol>
-        <p class="rec-cred">Grabado en abril de 2024 con Lucy Patané en el estudio Sale la Luna (Buenos Aires).</p>
+        <dl class="credits">
+          <div><dt>Salida</dt><dd>Febrero de 2026</dd></div>
+          <div><dt>Composición</dt><dd>Centeiia Fútbol Club, entre 2020 y 2024</dd></div>
+          <div><dt>Grabación</dt><dd>Abril de 2024 en Estudio Sale la Luna (Buenos Aires), con Lucy Patané y Carolina Roballo. Arreglos finales grabados en 2024 y 2025 en casas y salas de ensayo de Montevideo y Pinamar, y en Air Concret y Araúcho S.A.</dd></div>
+          <div><dt>Mezcla</dt><dd>Diego Cotelo</dd></div>
+          <div><dt>Masterización</dt><dd>Nicolás Demczylo</dd></div>
+          <div><dt>Arte de tapa</dt><dd>Fiera y Lucía Surroca</dd></div>
+          <div><dt>Apoyo</dt><dd>Fondo Nacional de la Música (FONAM)</dd></div>
+        </dl>
+        <div class="platforms">
+          <a class="ulink" href="https://centeiia.bandcamp.com/album/la-luz-es-cuesti-n-de-tiempo" target="_blank" rel="noopener">Bandcamp</a>
+          <a class="ulink" href="https://open.spotify.com/album/4Lg1WaVPKKLzKLtPFjOiRv" target="_blank" rel="noopener">Spotify</a>
+        </div>
       </div>
     </div>
   </section>
@@ -627,17 +644,32 @@ addEventListener('resize',layout);
 layout();
 
 // ---------- Escuchar: cd que flota y temas con letras ----------
+const BC='https://centeiia.bandcamp.com/track/';
 const TRACKS=[
- {t:'Nombre del tema',d:'',l:''},{t:'Nombre del tema',d:'',l:''},{t:'Nombre del tema',d:'',l:''},{t:'Nombre del tema',d:'',l:''},
- {t:'Nombre del tema',d:'',l:''},{t:'Nombre del tema',d:'',l:''},{t:'Nombre del tema',d:'',l:''},{t:'Nombre del tema',d:'',l:''}
+ {t:'universo',d:'3:28',u:'universo'},
+ {t:'las vertientes',d:'5:44',u:'las-vertientes'},
+ {t:'gárgara silvestre',d:'3:37',u:'g-rgara-silvestre'},
+ {t:'color azafrán',d:'3:45',u:'color-azafr-n'},
+ {t:'fuego afuera',d:'2:40',u:'fuego-afuera'},
+ {t:'yendo',d:'3:26',u:'yendo'},
+ {t:'ballenas',d:'8:41',u:'ballenas'}
 ];
 const tracksEl=document.getElementById('tracks');
+const lyrCache={};
+async function loadLyrics(i,panel){
+  const pre=panel.querySelector('pre');const tr=TRACKS[i];
+  const file=`letras/${String(i+1).padStart(2,'0')}-${tr.u}.txt`;
+  let txt=lyrCache[i];
+  if(txt===undefined){try{const r=await fetch(file,{cache:'no-cache'});txt=r.ok?(await r.text()).trim():'';}catch(e){txt='';}lyrCache[i]=txt;}
+  if(txt){pre.textContent=txt;}
+  else{pre.innerHTML=`<a class="ulink" href="${BC+tr.u}#lyrics" target="_blank" rel="noopener">Leer la letra en Bandcamp</a>`;}
+}
 TRACKS.forEach((tr,i)=>{
   const li=document.createElement('li');const id='lyr'+i;
   li.innerHTML=`<button class="trow" type="button" aria-expanded="false" aria-controls="${id}"><span class="no">${String(i+1).padStart(2,'0')}</span><span class="tt">${tr.t}</span><span class="dur">${tr.d}</span><span class="lt">letra</span></button>
-  <div class="lyr" id="${id}"><div><pre>${tr.l||'La letra de este tema todavía no está cargada.'}</pre></div></div>`;
+  <div class="lyr" id="${id}"><div><pre>Cargando…</pre></div></div>`;
   const b=li.querySelector('.trow'),panel=li.querySelector('.lyr');
-  b.addEventListener('click',()=>{const o=b.getAttribute('aria-expanded')!=='true';b.setAttribute('aria-expanded',o);panel.classList.toggle('open',o);});
+  b.addEventListener('click',()=>{const o=b.getAttribute('aria-expanded')!=='true';b.setAttribute('aria-expanded',o);panel.classList.toggle('open',o);if(o)loadLyrics(i,panel);});
   tracksEl.appendChild(li);
 });
 // reproductor de Bandcamp: carga el widget real cuando la web está en su propio dominio
