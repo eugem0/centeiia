@@ -171,7 +171,8 @@
   #site .trow:focus-visible{outline:none;background:#0d0d0d}
   .trow .dur{color:var(--grey)}
   .trow .lt{color:var(--grey);font-size:12px;border:1px solid #333;border-radius:20px;padding:3px 9px;transition:color .2s,border-color .2s}
-  .trow:hover .tt,.trow[aria-expanded="true"] .tt{color:transparent;background:var(--tex) center/300px;-webkit-background-clip:text;background-clip:text}
+  .trow .tt{display:inline-block;transform-origin:left center;transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+  .trow:hover .tt{transform:scale(1.04)}
   .trow:hover .lt{color:#fff;border-color:#777}
   .trow[aria-expanded="true"] .lt{color:#000;background:#fff;border-color:#fff}
   .lyr{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s cubic-bezier(.2,.8,.2,1)}
