@@ -45,11 +45,12 @@
   #site :focus-visible{outline:1px solid #fff;outline-offset:4px}
 
   header{position:sticky;top:0;z-index:5;background:#000;
-    display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:20px;padding:18px var(--pad)}
+    display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:20px clamp(28px,3.5vw,56px);padding:18px var(--pad)}
   .home{background:none;border:0;cursor:pointer;padding:0;display:block}
   .home img{display:block;width:clamp(190px,22vw,300px);height:auto}
   nav{display:flex;gap:clamp(16px,3vw,40px)}
-  nav.r{justify-content:flex-end}
+  nav.l{justify-content:flex-end}
+  nav.r{justify-content:flex-start}
   nav a{color:var(--grey);text-decoration:none;font:400 18px/1 'Barlow Condensed',sans-serif;letter-spacing:.01em;
     padding:6px 0;background:linear-gradient(#fff,#fff) 0 100%/0 1px no-repeat;transition:color .2s,background-size .3s}
   nav a:hover{color:#fff}
@@ -253,12 +254,14 @@
   .muted{color:var(--grey)!important;font-size:15px!important}
 
   /* contacto */
-  .contact dl{margin:0;display:grid;gap:44px}
-  .contact dt{color:var(--grey);font-size:15px;margin-bottom:10px}
+  .contact dl{margin:0;display:grid;gap:26px}
+  .contact dt{color:var(--grey);font-size:13px;margin-bottom:6px}
   .contact dd{margin:0}
-  .contact a.big{color:#fff;text-decoration:none;font:400 clamp(30px,4.4vw,60px)/1 'Barlow Condensed',sans-serif;word-break:break-word;
-    background:linear-gradient(#fff,#fff) 0 100%/0 2px no-repeat;padding-bottom:6px;transition:background-size .35s}
-  .contact a.big:hover{background-size:100% 2px}
+  .contact a.big{color:#fff;text-decoration:none;font:400 clamp(20px,2.2vw,28px)/1 'Barlow Condensed',sans-serif;word-break:break-word;
+    background:linear-gradient(#fff,#fff) 0 100%/0 1px no-repeat;padding-bottom:4px;transition:background-size .35s}
+  .contact a.big:hover{background-size:100% 1px}
+  .contact .s-head h2{font-size:clamp(24px,2.4vw,32px)}
+  section.s.contact{padding-top:clamp(50px,8vh,90px);padding-bottom:clamp(50px,8vh,90px)}
 
   footer{padding:50px var(--pad);color:var(--grey);font-size:14px}
 
@@ -815,8 +818,14 @@ cdStage.addEventListener('pointerleave',()=>{ctx=cty=0;chv=0;});
     const d=new FormData(f);const nombre=(d.get('nombre')||'').trim(),contacto=(d.get('contacto')||'').trim();
     if(!nombre||!contacto){msg.textContent='Completá tu nombre y un mail o celular.';msg.dataset.k='form';return;}
     const body=`Hola Centeiia, quiero reservar:\n\nRemera Gárgara silvestre\nTalle: ${talle()}\nCantidad: ${q}\n\nNombre: ${nombre}\nContacto: ${contacto}\n${d.get('comentario')?'Comentario: '+d.get('comentario')+'\n':''}`;
-    location.href='mailto:correodecenteiia@gmail.com?subject='+encodeURIComponent('Reserva remera Gárgara silvestre — talle '+talle())+'&body='+encodeURIComponent(body);
-    msg.dataset.k='sent';msg.textContent='Se abrió tu correo con la reserva lista. Envialo para confirmarla. Si no se abrió, escribinos a correodecenteiia@gmail.com';
+    const href='mailto:correodecenteiia@gmail.com?subject='+encodeURIComponent('Reserva remera Gárgara silvestre — talle '+talle())+'&body='+encodeURIComponent(body);
+    try{const a=document.createElement('a');a.href=href;a.target='_blank';a.rel='noopener';document.body.appendChild(a);a.click();a.remove();}catch(err){}
+    msg.dataset.k='sent';
+    msg.innerHTML='Tu reserva está lista. Si no se abrió tu correo, <a class="ulink" target="_blank" rel="noopener" id="mailLink">tocá acá para enviarla</a> o <button type="button" class="txtbtn" id="copyResv" style="font-size:13px;text-decoration:underline">copiá el texto</button> y mandalo a correodecenteiia@gmail.com';
+    document.getElementById('mailLink').href=href;
+    document.getElementById('copyResv').onclick=async e=>{const t=body;let ok=false;
+      try{await navigator.clipboard.writeText(t);ok=true;}catch(_){try{const ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();ok=document.execCommand('copy');ta.remove();}catch(__){}}
+      e.target.textContent=ok?'¡copiado!':'no se pudo copiar';};
   });
 })();
 show(location.hash.slice(1));
