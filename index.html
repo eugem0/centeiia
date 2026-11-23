@@ -191,7 +191,11 @@
   .credits dt{color:var(--grey)}
   .credits dd{margin:0;color:#d4d4d4;max-width:52ch}
   @media (max-width:520px){.credits div{grid-template-columns:1fr;gap:2px}}
-  .platforms{display:flex;flex-wrap:wrap;gap:26px}
+  .platforms{display:flex;flex-wrap:wrap;gap:22px;align-items:center}
+  .plat{color:#8f8f8f;display:grid;place-items:center;transition:color .2s,transform .2s}
+  .plat:hover{color:#fff;transform:translateY(-2px)}
+  .ulink{color:#fff;text-decoration:none;background:linear-gradient(#fff,#fff) 0 100%/100% 1px no-repeat;padding-bottom:3px;transition:background-size .3s}
+  .ulink:hover{background-size:0 1px}
   @media (max-width:860px){.listen{grid-template-columns:1fr}.cd-stage{position:relative;top:0}.cd{width:min(86vw,420px)}}
   @media (prefers-reduced-motion:reduce){.disc{animation:none}}
   /* tienda */
@@ -360,8 +364,12 @@
           <div><dt>Apoyo</dt><dd>Fondo Nacional de la Música (FONAM)</dd></div>
         </dl>
         <div class="platforms">
-          <a class="ulink" href="https://centeiia.bandcamp.com/album/la-luz-es-cuesti-n-de-tiempo" target="_blank" rel="noopener">Bandcamp</a>
-          <a class="ulink" href="https://open.spotify.com/album/4Lg1WaVPKKLzKLtPFjOiRv" target="_blank" rel="noopener">Spotify</a>
+          <a class="plat" href="https://centeiia.bandcamp.com/album/la-luz-es-cuesti-n-de-tiempo" target="_blank" rel="noopener" aria-label="Escuchar en Bandcamp" title="Bandcamp">
+            <svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true"><path d="M0 18.75l7.44-13.5H24l-7.44 13.5z" fill="currentColor"/></svg>
+          </a>
+          <a class="plat" href="https://open.spotify.com/album/4Lg1WaVPKKLzKLtPFjOiRv" target="_blank" rel="noopener" aria-label="Escuchar en Spotify" title="Spotify">
+            <svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="currentColor"/><path d="M5.6 9.1c4.2-1.3 9.4-.9 12.9 1.2M6.4 12.4c3.5-1 7.6-.7 10.6 1M7.2 15.5c2.8-.8 5.9-.5 8.2.9" fill="none" stroke="#000" stroke-width="1.7" stroke-linecap="round"/></svg>
+          </a>
         </div>
       </div>
     </div>
