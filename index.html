@@ -129,8 +129,8 @@
   .drawer-bg{position:fixed;inset:0;z-index:20;background:rgba(0,0,0,.72);opacity:0;pointer-events:none;transition:opacity .35s}
   .drawer{position:fixed;top:0;right:0;bottom:0;z-index:21;width:min(760px,100vw);background:#000;border-left:1px solid #1f1f1f;
     overflow-y:auto;transform:translateX(100%);transition:transform .5s cubic-bezier(.2,.8,.2,1);visibility:hidden}
-  body.drawer-open .drawer-bg{opacity:1;pointer-events:auto}
-  body.drawer-open .drawer{transform:none;visibility:visible}
+  body.drawer-open #drawerBg{opacity:1;pointer-events:auto}
+  body.drawer-open #drawer{transform:none;visibility:visible}
   body.drawer-open,body.prod-open{overflow:hidden}
   body.prod-open #prodBg{opacity:1;pointer-events:auto}
   body.prod-open #prodDrawer{transform:none;visibility:visible}
