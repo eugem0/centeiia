@@ -203,14 +203,14 @@
   @media (max-width:860px){.listen{grid-template-columns:1fr}.cd-stage{position:relative;top:0}.cd{width:min(64vw,300px)}}
   @media (prefers-reduced-motion:reduce){.disc{animation:none}}
   /* tienda: tarjetas chicas + panel con todos los datos */
-  .shop{grid-column:1/-1;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,380px));gap:28px}
+  .shop{grid-column:1/-1;display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,230px));gap:28px}
   .pcard{position:relative;display:block;width:100%;aspect-ratio:760/880;padding:0;border:0;overflow:hidden;cursor:pointer;color:#fff;text-align:left;
     background:none;perspective:900px}
   .pc-img{position:absolute;left:0;right:0;top:5%;display:grid;place-items:center}
   .pc-img .tee{width:66%;height:auto;display:block;filter:drop-shadow(0 18px 22px rgba(0,0,0,.6));transition:transform .5s cubic-bezier(.2,.8,.2,1);will-change:transform}
-  .pc-name,.pc-price{position:absolute;left:14%;right:8%;z-index:1;font-family:'Barlow',system-ui,sans-serif;letter-spacing:.01em}
-  .pc-name{bottom:15%;font-size:clamp(15px,1.4vw,19px);font-weight:400}
-  .pc-price{bottom:7%;font-size:clamp(17px,1.7vw,23px);font-weight:400}
+  .pc-name,.pc-price{position:absolute;left:14%;right:8%;z-index:1;font-family:'IBM Plex Mono',ui-monospace,monospace;font-weight:300;letter-spacing:0}
+  .pc-name{bottom:15%;font-size:13px;line-height:1.3}
+  .pc-price{bottom:7%;font-size:13px;color:var(--grey)}
   .pd-img{display:grid;place-items:center;padding:30px 0 10px;background:radial-gradient(closest-side,#222,#000 75%)}
   .pd-img img{width:min(70%,380px);height:auto;display:block;filter:drop-shadow(0 24px 30px rgba(0,0,0,.8))}
   .prod-data{margin:24px 0}
