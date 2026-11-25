@@ -115,6 +115,11 @@
     "h": 832
    },
    {
+    "src": "registro/2024-grabacion-la-luz-es-cuestion-de-tiempo/web/2026-09-23_09.51.10_0.jpg",
+    "w": 1600,
+    "h": 1200
+   },
+   {
     "src": "registro/2024-grabacion-la-luz-es-cuestion-de-tiempo/web/2026-09-23_09.51.10_1.jpg",
     "w": 1600,
     "h": 900
@@ -131,6 +136,11 @@
    },
    {
     "src": "registro/2024-grabacion-la-luz-es-cuestion-de-tiempo/web/2026-09-23_09.51.10_4.jpg",
+    "w": 1200,
+    "h": 1600
+   },
+   {
+    "src": "registro/2024-grabacion-la-luz-es-cuestion-de-tiempo/web/2026-09-23_09.51.10_5.jpg",
     "w": 1200,
     "h": 1600
    },
@@ -223,6 +233,11 @@
     "h": 1600
    },
    {
+    "src": "registro/2024-grabacion-la-luz-es-cuestion-de-tiempo/web/2026-09-23_z13.jpg",
+    "w": 1200,
+    "h": 1600
+   },
+   {
     "src": "registro/2024-grabacion-la-luz-es-cuestion-de-tiempo/web/2026-09-23_zv1.mp4",
     "poster": "registro/2024-grabacion-la-luz-es-cuestion-de-tiempo/web/2026-09-23_zv1.poster.jpg",
     "tipo": "video",
@@ -235,6 +250,13 @@
     "tipo": "video",
     "w": 1024,
     "h": 576
+   },
+   {
+    "src": "registro/2024-grabacion-la-luz-es-cuestion-de-tiempo/web/2026-09-23_zv3.mp4",
+    "poster": "registro/2024-grabacion-la-luz-es-cuestion-de-tiempo/web/2026-09-23_zv3.poster.jpg",
+    "tipo": "video",
+    "w": 576,
+    "h": 1024
    }
   ]
  }
