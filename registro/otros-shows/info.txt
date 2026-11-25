@@ -1,0 +1,5 @@
+titulo: Otros shows
+fecha: 
+lugar: 
+fotos: 
+link: 

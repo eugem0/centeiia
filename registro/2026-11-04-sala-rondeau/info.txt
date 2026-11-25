@@ -1,0 +1,5 @@
+titulo: La luz es cuestión de tiempo
+fecha: 4 de noviembre de 2026
+lugar: Sala Rondeau
+fotos: Mateo Rodríguez
+link: https://www.instagram.com/emerdz/
