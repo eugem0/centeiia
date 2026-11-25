@@ -126,7 +126,7 @@
   .lightbox{position:fixed;inset:0;z-index:30;background:rgba(0,0,0,.94);display:none;place-items:center;padding:5vh 5vw}
   .lightbox.open{display:grid;animation:mIn .3s ease}
   @keyframes mIn{from{opacity:0}to{opacity:1}}
-  .lightbox img{max-width:100%;max-height:90vh;display:block;border-radius:14px}
+  .lightbox img,.lightbox video{max-width:100%;max-height:90vh;display:block;border-radius:14px;background:#000}
   .lb-close{position:fixed;top:18px;right:26px}
   .txtbtn{background:none;border:0;padding:4px 0;color:var(--grey);cursor:pointer;font:400 17px/1 'Barlow Condensed',sans-serif;transition:color .2s}
   .txtbtn:hover{color:#fff}
@@ -356,6 +356,8 @@
   .rp-grid button{display:block;width:100%;margin:0 0 14px;padding:0;border:0;background:#111;border-radius:12px;overflow:hidden;cursor:zoom-in;break-inside:avoid}
   .rp-grid img{display:block;width:100%;height:auto;transition:transform .6s cubic-bezier(.2,.8,.2,1),opacity .3s}
   .rp-grid button:hover img{transform:scale(1.03)}
+  .rp-grid button{position:relative}
+  .rp-play{position:absolute;left:50%;top:50%;translate:-50% -50%;width:58px;height:58px;border-radius:50%;background:rgba(0,0,0,.55);color:#fff;display:grid;place-items:center;backdrop-filter:blur(4px);pointer-events:none}
   .lb-arrow{position:fixed;top:50%;translate:0 -50%;width:52px;height:52px;border-radius:50%;border:0;background:#161616;color:#fff;cursor:pointer;display:grid;place-items:center}
   .lb-arrow:hover{background:#262626}
   .lb-prev{left:18px}.lb-next{right:18px}
@@ -460,6 +462,7 @@
 
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Foto ampliada">
     <img id="lbImg" alt="">
+    <video id="lbVid" controls playsinline preload="metadata" hidden></video>
     <button class="txtbtn lb-close" id="lbClose">Cerrar</button>
     <button class="lb-arrow lb-prev" id="lbPrev" aria-label="Foto anterior" hidden><svg viewBox="0 0 24 24" width="22" height="22"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
     <button class="lb-arrow lb-next" id="lbNext" aria-label="Foto siguiente" hidden><svg viewBox="0 0 24 24" width="22" height="22"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
@@ -845,15 +848,20 @@ flow.addEventListener('wheel',e=>{if(Math.abs(e.deltaX)<=Math.abs(e.deltaY))retu
 // foto grande
 const lb=document.getElementById('lightbox');
 let lbList=null,lbI=0;
-function lbShow(){document.getElementById('lbImg').src=lbList[lbI].src;document.getElementById('lbCap').textContent=lbList[lbI].cap||'';}
+function lbShow(){const it=lbList[lbI],img=document.getElementById('lbImg'),vid=document.getElementById('lbVid');
+  vid.pause();
+  if(it.tipo==='video'){img.hidden=true;vid.hidden=false;vid.poster=it.poster||'';vid.src=it.src;vid.play().catch(()=>{});}
+  else{vid.hidden=true;vid.removeAttribute('src');vid.load();img.hidden=false;img.src=it.src;}
+  document.getElementById('lbCap').textContent=it.cap||'';}
 function openLb(list,i){const multi=Array.isArray(list);lbList=multi?list:null;lbI=i||0;
+  if(!multi){const v=document.getElementById('lbVid');v.pause();v.hidden=true;document.getElementById('lbImg').hidden=false;}
   document.getElementById('lbPrev').hidden=!multi;document.getElementById('lbNext').hidden=!multi;
   if(multi)lbShow();else{document.getElementById('lbImg').src=GALLERY[gi];document.getElementById('lbCap').textContent='';}
   lb.classList.add('open');document.getElementById('lbClose').focus();}
 function lbStep(d){if(!lbList)return;lbI=(lbI+d+lbList.length)%lbList.length;lbShow();}
 document.getElementById('lbPrev').onclick=()=>lbStep(-1);document.getElementById('lbNext').onclick=()=>lbStep(1);
 addEventListener('keydown',e=>{if(!lb.classList.contains('open')||!lbList)return;if(e.key==='ArrowRight')lbStep(1);if(e.key==='ArrowLeft')lbStep(-1);});
-function closeLb(){lb.classList.remove('open');document.getElementById('galOpen').focus();}
+function closeLb(){document.getElementById('lbVid').pause();lb.classList.remove('open');document.getElementById('galOpen').focus();}
 document.getElementById('galOpen').onclick=()=>openLb();
 document.getElementById('lbClose').onclick=closeLb;
 lb.addEventListener('click',e=>{if(e.target===lb)closeLb();});
@@ -998,11 +1006,14 @@ const GIGS=[];
     const meta=[g.fecha,g.lugar].filter(Boolean).join(', ');
     const cred=g.fotos?(g.link?`Fotos: <a class="ulink" href="${g.link}" target="_blank" rel="noopener">${g.fotos}</a>`:'Fotos: '+g.fotos):'';
     const cap=[g.titulo,meta].filter(Boolean).join(', ');
-    const list=g.imagenes.map(im=>({src:im.src,cap}));
+    const list=g.imagenes.map(im=>({src:im.src,tipo:im.tipo,poster:im.poster,cap}));
     sec.innerHTML=`<header><h3>${g.titulo}</h3><span class="rp-meta">${meta}</span>${cred?`<span class="rp-meta">${cred}</span>`:''}</header><div class="rp-grid"></div>`;
     const grid=sec.querySelector('.rp-grid');
     g.imagenes.forEach((im,i)=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-label','Ver foto '+(i+1)+' de '+g.titulo);
-      b.innerHTML=`<img loading="lazy" src="${im.src}" width="${im.w}" height="${im.h}" alt="">`;b.onclick=()=>openLb(list,i);grid.appendChild(b);});
+      b.innerHTML=im.tipo==='video'
+        ?`<img loading="lazy" src="${im.poster}" width="${im.w}" height="${im.h}" alt=""><span class="rp-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span>`
+        :`<img loading="lazy" src="${im.src}" width="${im.w}" height="${im.h}" alt="">`;
+      if(im.tipo==='video')b.setAttribute('aria-label','Ver video '+(i+1)+' de '+g.titulo);b.onclick=()=>openLb(list,i);grid.appendChild(b);});
     box.appendChild(sec);});
 })();
 show(location.hash.slice(1));

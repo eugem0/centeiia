@@ -93,5 +93,144 @@
     "h": 1067
    }
   ]
+ },
+ {
+  "carpeta": "2024-grabacion-la-luz-es-cuestion-de-tiempo",
+  "titulo": "Grabación del disco La luz es cuestión de tiempo",
+  "fecha": "2024 – 2025",
+  "lugar": "Estudio Sale la Luna, Buenos Aires / Estudio Araúcho S.A., Montevideo / Nuestras casas, Montevideo",
+  "fotos": "",
+  "link": "",
+  "imagenes": [
+   {
+    "src": "registro/2024-grabacion-la-luz-es-cuestion-de-tiempo/web/2026-09-23_09.51.09.jpg",
+    "w": 1600,
+    "h": 1200
+   },
+   {
+    "src": "registro/2024-grabacion-la-luz-es-cuestion-de-tiempo/web/2026-09-23_09.51.10.mp4",
+    "poster": "registro/2024-grabacion-la-luz-es-cuestion-de-tiempo/web/2026-09-23_09.51.10.poster.jpg",
+    "tipo": "video",
+    "w": 464,
+    "h": 832
+   },
+   {
+    "src": "registro/2024-grabacion-la-luz-es-cuestion-de-tiempo/web/2026-09-23_09.51.10_1.jpg",
+    "w": 1600,
+    "h": 900
+   },
+   {
+    "src": "registro/2024-grabacion-la-luz-es-cuestion-de-tiempo/web/2026-09-23_09.51.10_2.jpg",
+    "w": 1600,
+    "h": 1200
+   },
+   {
+    "src": "registro/2024-grabacion-la-luz-es-cuestion-de-tiempo/web/2026-09-23_09.51.10_3.jpg",
+    "w": 1200,
+    "h": 1600
+   },
+   {
+    "src": "registro/2024-grabacion-la-luz-es-cuestion-de-tiempo/web/2026-09-23_09.51.10_4.jpg",
+    "w": 1200,
+    "h": 1600
+   },
+   {
+    "src": "registro/2024-grabacion-la-luz-es-cuestion-de-tiempo/web/2026-09-23_09.51.11.mp4",
+    "poster": "registro/2024-grabacion-la-luz-es-cuestion-de-tiempo/web/2026-09-23_09.51.11.poster.jpg",
+    "tipo": "video",
+    "w": 848,
+    "h": 480
+   },
+   {
+    "src": "registro/2024-grabacion-la-luz-es-cuestion-de-tiempo/web/2026-09-23_09.51.14_1.mp4",
+    "poster": "registro/2024-grabacion-la-luz-es-cuestion-de-tiempo/web/2026-09-23_09.51.14_1.poster.jpg",
+    "tipo": "video",
+    "w": 480,
+    "h": 848
+   },
+   {
+    "src": "registro/2024-grabacion-la-luz-es-cuestion-de-tiempo/web/2026-09-23_09.51.14_2.mp4",
+    "poster": "registro/2024-grabacion-la-luz-es-cuestion-de-tiempo/web/2026-09-23_09.51.14_2.poster.jpg",
+    "tipo": "video",
+    "w": 480,
+    "h": 848
+   },
+   {
+    "src": "registro/2024-grabacion-la-luz-es-cuestion-de-tiempo/web/2026-09-23_09.51.14_3.mp4",
+    "poster": "registro/2024-grabacion-la-luz-es-cuestion-de-tiempo/web/2026-09-23_09.51.14_3.poster.jpg",
+    "tipo": "video",
+    "w": 848,
+    "h": 480
+   },
+   {
+    "src": "registro/2024-grabacion-la-luz-es-cuestion-de-tiempo/web/2026-09-23_z01.jpg",
+    "w": 1200,
+    "h": 1600
+   },
+   {
+    "src": "registro/2024-grabacion-la-luz-es-cuestion-de-tiempo/web/2026-09-23_z02.jpg",
+    "w": 1280,
+    "h": 853
+   },
+   {
+    "src": "registro/2024-grabacion-la-luz-es-cuestion-de-tiempo/web/2026-09-23_z03.jpg",
+    "w": 1600,
+    "h": 1200
+   },
+   {
+    "src": "registro/2024-grabacion-la-luz-es-cuestion-de-tiempo/web/2026-09-23_z04.jpg",
+    "w": 1600,
+    "h": 1200
+   },
+   {
+    "src": "registro/2024-grabacion-la-luz-es-cuestion-de-tiempo/web/2026-09-23_z05.jpg",
+    "w": 1600,
+    "h": 1200
+   },
+   {
+    "src": "registro/2024-grabacion-la-luz-es-cuestion-de-tiempo/web/2026-09-23_z06.jpg",
+    "w": 1600,
+    "h": 1200
+   },
+   {
+    "src": "registro/2024-grabacion-la-luz-es-cuestion-de-tiempo/web/2026-09-23_z07.jpg",
+    "w": 1600,
+    "h": 1200
+   },
+   {
+    "src": "registro/2024-grabacion-la-luz-es-cuestion-de-tiempo/web/2026-09-23_z08.jpg",
+    "w": 1280,
+    "h": 853
+   },
+   {
+    "src": "registro/2024-grabacion-la-luz-es-cuestion-de-tiempo/web/2026-09-23_z09.jpg",
+    "w": 1280,
+    "h": 853
+   },
+   {
+    "src": "registro/2024-grabacion-la-luz-es-cuestion-de-tiempo/web/2026-09-23_z10.jpg",
+    "w": 1280,
+    "h": 853
+   },
+   {
+    "src": "registro/2024-grabacion-la-luz-es-cuestion-de-tiempo/web/2026-09-23_z11.jpg",
+    "w": 900,
+    "h": 1600
+   },
+   {
+    "src": "registro/2024-grabacion-la-luz-es-cuestion-de-tiempo/web/2026-09-23_zv1.mp4",
+    "poster": "registro/2024-grabacion-la-luz-es-cuestion-de-tiempo/web/2026-09-23_zv1.poster.jpg",
+    "tipo": "video",
+    "w": 720,
+    "h": 1280
+   },
+   {
+    "src": "registro/2024-grabacion-la-luz-es-cuestion-de-tiempo/web/2026-09-23_zv2.mp4",
+    "poster": "registro/2024-grabacion-la-luz-es-cuestion-de-tiempo/web/2026-09-23_zv2.poster.jpg",
+    "tipo": "video",
+    "w": 1024,
+    "h": 576
+   }
+  ]
  }
 ]
