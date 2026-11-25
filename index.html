@@ -101,6 +101,11 @@
   .drawer .d-text p{font-size:14px;line-height:1.8}
   .drawer .d-links a{font-size:14px}
   .drawer .d-text h3{font:300 clamp(26px,3vw,38px)/1.15 'IBM Plex Mono',ui-monospace,monospace}
+  .info{perspective:1200px}
+  .info .ph{border-radius:18px;transform:rotateY(var(--ry,-14deg)) rotateX(var(--rx,5deg)) rotateZ(-1.5deg);transform-origin:30% 50%;
+    transition:transform 1.4s cubic-bezier(.2,.8,.2,1);will-change:transform;box-shadow:-18px 26px 50px rgba(0,0,0,.7);max-height:52vh;aspect-ratio:4/5}
+  .info .ph.flip{animation:flip 1.1s ease}
+  @keyframes flip{from{opacity:.25}to{opacity:1}}
   /* registro */
   .reg{grid-column:1/-1;margin-top:40px;text-align:center}
   .reg h3.sub{text-align:left}
@@ -830,6 +835,13 @@ cdStage.addEventListener('pointerleave',()=>{ctx=cty=0;chv=0;});
       try{await navigator.clipboard.writeText(t);ok=true;}catch(_){try{const ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();ok=document.execCommand('copy');ta.remove();}catch(__){}}
       e.target.textContent=ok?'¡copiado!':'no se pudo copiar';};
   });
+})();
+// Integrantes: la foto es una tarjeta que se inclina apenas con el mouse y cambia con un fundido
+(function(){const ph=document.querySelector('.info .ph'),team=document.querySelector('.team');
+  team.addEventListener('pointermove',e=>{const r=ph.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+    ph.style.setProperty('--ry',(-14+x*6*calm)+'deg');ph.style.setProperty('--rx',(5-y*4*calm)+'deg');});
+  team.addEventListener('pointerleave',()=>{ph.style.removeProperty('--ry');ph.style.removeProperty('--rx');});
+  new MutationObserver(()=>{ph.classList.remove('flip');void ph.offsetWidth;ph.classList.add('flip');}).observe(document.getElementById('iName'),{childList:true,characterData:true,subtree:true});
 })();
 show(location.hash.slice(1));
 </script>
