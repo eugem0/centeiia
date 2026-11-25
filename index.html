@@ -302,6 +302,25 @@
     #drawer .d-photo{grid-column:1;grid-row:2;position:relative;height:62vh;padding:0 16px}
     #drawer .d-text{grid-column:1;grid-row:3}
   }
+  /* ficha: links con icono de plataforma, navegación con nombres y botón cerrar */
+.d-links{margin-top:44px!important}
+.d-links-lbl{margin:44px 0 12px;color:#8f8f8f;font:300 13px/1 'IBM Plex Mono',monospace}
+.d-links li{border:0!important;margin:0 0 8px}
+.d-links a.pl{display:grid!important;grid-template-columns:28px 1fr auto;align-items:center;gap:14px;padding:12px 14px!important;
+  background:#0d0d0d;border-radius:12px;transition:background .2s!important;font-size:14px}
+.d-links a.pl:hover{background:#1a1a1a;padding-left:14px!important}
+.d-links a.pl svg{width:22px;height:22px;color:#cfcfcf}
+.d-links a.pl .pf{color:#8f8f8f;font-size:12px}
+.d-nav{display:grid!important;grid-template-columns:1fr 1fr;gap:12px;margin-top:64px!important;border-top:1px solid #1f1f1f;padding-top:22px}
+.d-nav button{text-align:left;background:none;border:0;cursor:pointer;color:#fff;padding:6px 0}
+.d-nav button+button{text-align:right}
+.d-nav small{display:block;color:#8f8f8f;font:300 12px/1 'IBM Plex Mono',monospace;margin-bottom:8px}
+.d-nav b{color:#c98a52;font:300 14px/1.3 'IBM Plex Mono',monospace;text-transform:uppercase;transition:opacity .2s}
+.d-nav button:hover b{color:#e0a874}
+#dClose{width:44px;height:44px;border-radius:50%;border:1px solid #333!important;font-size:0!important;position:relative}
+#dClose::before,#dClose::after{content:"";position:absolute;left:50%;top:50%;width:16px;height:1px;background:#fff;transform:translate(-50%,-50%) rotate(45deg)}
+#dClose::after{transform:translate(-50%,-50%) rotate(-45deg)}
+#dClose:hover{background:#1a1a1a}
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;1,300&family=Barlow:wght@300;400;500&family=Barlow+Condensed:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
@@ -862,6 +881,26 @@ cdStage.addEventListener('pointerleave',()=>{ctx=cty=0;chv=0;});
 // ficha: fundido de la foto al pasar de integrante
 (function(){const img=document.getElementById('dImg');
   new MutationObserver(()=>{img.classList.add('fade');setTimeout(()=>img.classList.remove('fade'),60);}).observe(img,{attributes:true,attributeFilter:['src']});
+})();
+// ficha: links e iconos
+(function(){
+const IC={spotify:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="currentColor"/><path d="M5.6 9.1c4.2-1.3 9.4-.9 12.9 1.2M6.4 12.4c3.5-1 7.6-.7 10.6 1M7.2 15.5c2.8-.8 5.9-.5 8.2.9" fill="none" stroke="#000" stroke-width="1.7" stroke-linecap="round"/></svg>',
+youtube:'<svg viewBox="0 0 24 24"><rect x="1" y="5" width="22" height="14" rx="4" fill="currentColor"/><path d="M10 9l5 3-5 3z" fill="#000"/></svg>',
+bandcamp:'<svg viewBox="0 0 24 24"><path d="M0 18.75l7.44-13.5H24l-7.44 13.5z" fill="currentColor"/></svg>',
+soundcloud:'<svg viewBox="0 0 24 24"><path d="M10 8v9h9a3.5 3.5 0 0 0 0-7 5.5 5.5 0 0 0-9-2zM7 10v7M4 12v5M1 14v3" fill="currentColor" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>',
+web:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2 12h20M12 2c3 3 3 17 0 20M12 2c-3 3-3 17 0 20" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>'};
+const NAME={spotify:'Spotify',youtube:'YouTube',bandcamp:'Bandcamp',soundcloud:'SoundCloud',web:'Web'};
+const kind=u=>/spotify/.test(u)?'spotify':/youtu/.test(u)?'youtube':/bandcamp/.test(u)?'bandcamp':/soundcloud/.test(u)?'soundcloud':'web';
+const L=document.getElementById('dLinks');let busy=false;
+let lbl=document.createElement('p');lbl.className='d-links-lbl';lbl.textContent='Para escuchar y ver';L.before(lbl);
+new MutationObserver(()=>{if(busy)return;busy=true;
+  const as=[...L.querySelectorAll('a')];lbl.style.display=as.length?'':'none';
+  as.forEach(a=>{if(a.classList.contains('pl'))return;const k=kind(a.href);a.classList.add('pl');
+    a.innerHTML=IC[k]+'<span>'+a.textContent+'</span><span class="pf">'+NAME[k]+'</span>';});busy=false;}).observe(L,{childList:true});
+const P=document.getElementById('dPrev'),N=document.getElementById('dNext');
+function upd(){const n=PEOPLE.length;const pv=PEOPLE[(cur-1+n)%n],nx=PEOPLE[(cur+1)%n];
+  P.innerHTML='<small>Anterior</small><b>'+pv.name+'</b>';N.innerHTML='<small>Siguiente</small><b>'+nx.name+'</b>';}
+new MutationObserver(upd).observe(document.getElementById('dName'),{childList:true,characterData:true,subtree:true});
 })();
 show(location.hash.slice(1));
 </script>
