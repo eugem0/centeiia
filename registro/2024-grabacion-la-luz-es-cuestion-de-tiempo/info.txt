@@ -3,3 +3,4 @@ fecha: 2024 – 2025
 lugar: Estudio Sale la Luna, Buenos Aires / Estudio Araúcho S.A., Montevideo / Nuestras casas, Montevideo
 fotos: 
 link: 
+portada: 2026-09-23_z06.jpg
