@@ -286,6 +286,22 @@
     .card{height:80%}
   }
   @media (prefers-reduced-motion:reduce){.drawer,.pname{transition:none}}
+  /* ficha de integrante: pantalla completa en dos columnas */
+  #drawer{width:100vw;border-left:0;transform:none;opacity:0;transition:opacity .5s ease,visibility .5s;
+    display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);grid-template-rows:auto 1fr;align-items:start}
+  body.drawer-open #drawer{opacity:1}
+  #drawer .d-top{grid-column:2;grid-row:1;position:sticky;top:0;z-index:3;background:#000;padding:22px clamp(22px,4vw,60px)}
+  #drawer .d-photo{grid-column:1;grid-row:1/span 2;position:sticky;top:0;height:100vh;padding:clamp(20px,3vw,44px);display:flex;align-items:center}
+  #drawer .d-photo img{width:100%;height:100%;max-height:none;object-fit:cover;object-position:50% 30%;border-radius:18px;transition:opacity .6s ease}
+  #drawer .d-photo img.fade{opacity:0}
+  #drawer .d-text{grid-column:2;grid-row:2;padding:10px clamp(22px,4vw,60px) 80px;max-width:720px}
+  #drawer .d-text h3{font-size:clamp(30px,3.4vw,46px)}
+  @media (max-width:860px){
+    #drawer{grid-template-columns:1fr;grid-template-rows:auto auto 1fr}
+    #drawer .d-top{grid-column:1;grid-row:1}
+    #drawer .d-photo{grid-column:1;grid-row:2;position:relative;height:62vh;padding:0 16px}
+    #drawer .d-text{grid-column:1;grid-row:3}
+  }
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;1,300&family=Barlow:wght@300;400;500&family=Barlow+Condensed:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
@@ -842,6 +858,10 @@ cdStage.addEventListener('pointerleave',()=>{ctx=cty=0;chv=0;});
     ph.style.setProperty('--ry',(-14+x*6*calm)+'deg');ph.style.setProperty('--rx',(5-y*4*calm)+'deg');});
   team.addEventListener('pointerleave',()=>{ph.style.removeProperty('--ry');ph.style.removeProperty('--rx');});
   new MutationObserver(()=>{ph.classList.remove('flip');void ph.offsetWidth;ph.classList.add('flip');}).observe(document.getElementById('iName'),{childList:true,characterData:true,subtree:true});
+})();
+// ficha: fundido de la foto al pasar de integrante
+(function(){const img=document.getElementById('dImg');
+  new MutationObserver(()=>{img.classList.add('fade');setTimeout(()=>img.classList.remove('fade'),60);}).observe(img,{attributes:true,attributeFilter:['src']});
 })();
 show(location.hash.slice(1));
 </script>
